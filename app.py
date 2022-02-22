@@ -21,14 +21,3 @@ def create_table(table_name):
     :rtype: the type(s) of the return value(s)
     """
     pass
-
-@api.route("/hello")
-class HelloWorld(Resource):
-    def get(self):
-        """
-        The main route
-
-        :return: the welcome message
-        :rtype: string
-        """
-        return {"hello": "world"}

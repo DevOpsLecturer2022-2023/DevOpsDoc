@@ -1,7 +1,5 @@
 # app.py
 
-import os
-
 import boto3
 
 from flask import Flask, jsonify, request

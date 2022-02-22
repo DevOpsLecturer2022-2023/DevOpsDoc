@@ -15,7 +15,7 @@ def create_table(table_name):
     """
     A description of the function
     
-    : param param1: explanation of param1
+    :param param1: explanation of param1
     :type param1: state the parameter type
     :param param2: explanation of param2
     :type param2: state the parameter type

@@ -20,26 +20,7 @@ def create_table(table_name):
     :return: state what is returned by the function
     :rtype: the type(s) of the return value(s)
     """
-
-    if dynamoTableName not in client.list_tables()['TableNames']:
-        table = client.create_table(
-                TableName=table_name,
-            KeySchema=[
-                {'AttributeName': 'artist',
-                 'KeyType': 'HASH'}],
-            AttributeDefinitions=[
-                {'AttributeName': 'artist',
-                 'AttributeType': 'S'}],
-            ProvisionedThroughput={
-                'ReadCapacityUnits': 10,
-                'WriteCapacityUnits': 10})
-
-        client.put_item(
-        TableName=table_name,
-        Item={
-        'artist': {'S': 'The Beatles' },
-        'song': {'S': 'Yesterday' }
-        })
+    pass
 
 @api.route("/hello")
 class HelloWorld(Resource):

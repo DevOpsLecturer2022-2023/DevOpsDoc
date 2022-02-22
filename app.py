@@ -1,5 +1,13 @@
 # app.py
 
+import boto3
+
+from flask import Flask, jsonify, request
+from flask_restplus import Resource, Api
+
+app = Flask(__name__)
+api = Api(app)
+
 def create_table(table_name):
     """
     A description of the function
@@ -12,5 +20,34 @@ def create_table(table_name):
     :return: state what is returned by the function
     :rtype: the type(s) of the return value(s)
     """
-    pass
-  
+
+    if dynamoTableName not in client.list_tables()['TableNames']:
+        table = client.create_table(
+                TableName=table_name,
+            KeySchema=[
+                {'AttributeName': 'artist',
+                 'KeyType': 'HASH'}],
+            AttributeDefinitions=[
+                {'AttributeName': 'artist',
+                 'AttributeType': 'S'}],
+            ProvisionedThroughput={
+                'ReadCapacityUnits': 10,
+                'WriteCapacityUnits': 10})
+
+        client.put_item(
+        TableName=table_name,
+        Item={
+        'artist': {'S': 'The Beatles' },
+        'song': {'S': 'Yesterday' }
+        })
+
+@api.route("/hello")
+class HelloWorld(Resource):
+    def get(self):
+        """
+        The main route
+
+        :return: the welcome message
+        :rtype: string
+        """
+        return {"hello": "world"}
